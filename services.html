@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ANF Services</title>
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box;}
+    body{font-family:'Segoe UI',sans-serif;background:#fefefe;color:#333;}
+    .banner {
+      height:50vh; background: linear-gradient(135deg, #0a2239, #a36b5c);
+      display:flex; justify-content:center; align-items:center; color:#fff;
+      animation: slideBg 8s infinite alternate ease-in-out;
+    }
+    @keyframes slideBg {
+      from { background-position:0% 50%; }
+      to { background-position:100% 50%; }
+    }
+    .banner h1 { font-size:3rem; animation: fadeIn 2s ease-out; }
+    @keyframes fadeIn{to{opacity:1;}from{opacity:0;}}
+    .services-list {
+      display:grid; grid-template-columns:1fr 1fr; gap:20px;
+      max-width:900px; margin: -50px auto 30px; position:relative; z-index:1;
+    }
+    .service-card {
+      background:#fff; padding:20px; border-radius:10px;
+      box-shadow:0 4px 8px rgba(0,0,0,.1);
+      transition:transform .3s ease;
+      cursor:pointer;
+    }
+    .service-card:hover { transform:translateY(-10px); }
+    .service-card h3 { margin-bottom:10px; color:#a36b5c; }
+    .service-card p { font-size: .95rem; line-height:1.4; }
+
+    /* INQUIRY FORM */
+    .inquiry {
+      max-width:600px; margin:60px auto; padding:20px;
+      border:2px solid #a36b5c; border-radius:10px;
+      background:#fff; animation: fadeIn 2s ease-out 1s backwards;
+      opacity:0;
+    }
+    .inquiry h2 { margin-bottom:1rem; color:#0a2239; }
+    .inquiry label { display:block; margin:15px 0 5px; font-weight:600; }
+    .inquiry input, .inquiry textarea {
+      width:100%; padding:10px; border:1px solid #ccc; border-radius:6px;
+      font-size:1rem;
+    }
+    .inquiry button {
+      margin-top:20px; padding:12px 25px; border:none;
+      background:#a36b5c; color:#fff; border-radius:6px;
+      font-size:1rem; cursor:pointer;
+      transition:background .3s;
+    }
+    .inquiry button:hover { background:#0a2239; }
+
+    footer{ text-align:center; padding:40px 0; }
+    footer a{ color:#a36b5c; font-weight:600; }
+  </style>
+</head>
+<body>
+
+  <div class="banner">
+    <h1>Our Services</h1>
+  </div>
+
+  <div class="services-list">
+    <div class="service-card" onclick="alert('Detailed AI Solutions page coming soon!')">
+      <h3>AI Integration</h3>
+      <p>Custom machine learning models to turbocharge your operations.</p>
+    </div>
+    <div class="service-card" onclick="alert('Detailed Security Solutions page coming soon!')">
+      <h3>Security Audits</h3>
+      <p>End-to-end penetration testing and vulnerability assessments.</p>
+    </div>
+    <div class="service-card" onclick="alert('Detailed Efficiency Solutions page coming soon!')">
+      <h3>Process Optimization</h3>
+      <p>Streamlining workflows to save time and reduce costs.</p>
+    </div>
+    <div class="service-card" onclick="alert('Detailed Consulting Packages coming soon!')">
+      <h3>Consulting</h3>
+      <p>Strategic guidance from our expert team across industries.</p>
+    </div>
+  </div>
+
+  <!-- Inquiry Form: collect user details -->
+  <div class="inquiry">
+    <h2>Get in Touch</h2>
+    <!-- Name Input -->
+    <label for="name">Name</label>
+    <input type="text" id="name" placeholder="Your full name" />
+    <!-- Email Input -->
+    <label for="email">Email</label>
+    <input type="email" id="email" placeholder="you@example.com" />
+    <!-- Service Details -->
+    <label for="details">What can we help you with?</label>
+    <textarea id="details" rows="4" placeholder="Describe your project or questions"></textarea>
+    <!-- Submit Button -->
+    <button type="submit">Submit Inquiry</button>
+  </div>
+
+  <footer>
+    <a href="index.html">← Back to Home</a>
+  </footer>
+
+</body>
+</html>
