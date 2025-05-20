@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ANF Group — Home / About / Services / Current Projects</title>
+  <style>
+    /* —— RESET & BASE —— */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Segoe UI', sans-serif; overflow-x:hidden; background: #f5f5f5; color: #333; }
+    a { text-decoration:none; color:inherit; cursor:pointer; }
+
+    /* —— THEME COLORS —— */
+    :root {
+      --primary: #0a2239;
+      --accent: #a36b5c;
+      --light-bg: #fefefe;
+    }
+
+    /* —— NAVBAR —— */
+    nav {
+      position: fixed; top:0; left:0; right:0;
+      background: var(--light-bg);
+      display: flex; align-items:center; justify-content: space-between;
+      padding:10px 30px; box-shadow:0 2px 5px rgba(0,0,0,0.1);
+      z-index:100;
+    }
+    nav img { height:40px; animation: spin 10s linear infinite; }
+    @keyframes spin { from { transform: rotate(0deg);} to { transform: rotate(360deg);} }
+    nav .links a { margin-left:20px; font-weight:600; color: var(--primary); position: relative; }
+    nav .links a::after {
+      content: ''; position:absolute; left:0; bottom:-3px;
+      width:0; height:2px; background: var(--accent);
+      transition: width .3s;
+    }
+    nav .links a:hover::after { width:100%; }
+
+    /* —— SECTION BASE —— */
+    section {
+      min-height:100vh; padding:120px 20px 60px;
+      display:flex; flex-direction:column; align-items:center;
+      background: var(--light-bg); position: relative;
+      opacity:0; transform: translateY(30px);
+      transition: all 1s ease-out;
+    }
+    section:nth-child(even) { background: var(--light-bg); }
+    section.visible { opacity:1; transform: translateY(0); }
+    .section-logo { width:80px; margin-bottom:20px;
+      opacity:0; animation: pop 1.2s ease-out forwards;
+    }
+    @keyframes pop {
+      0% { transform: scale(0.5); opacity:0; }
+      60% { transform: scale(1.2); opacity:1; }
+      100% { transform: scale(1); }
+    }
+    h1, h2 { color: var(--primary); letter-spacing:1px; margin-bottom:10px; text-align:center; }
+    h1 { font-size:3rem; }
+    h2 { font-size:2.5rem; }
+
+    /* —— HERO —— */
+    #home { padding-top:80px; }
+    .hero-content { text-align:center; animation: fadeIn 2s ease-out forwards; opacity:0; }
+    .hero-content img { width:160px; margin:0 auto 1rem; filter: drop-shadow(0 0 10px rgba(0,0,0,0.2)); }
+
+    /* —— ABOUT —— */
+    #about ul { list-style:none; width:100%; max-width:600px; }
+    #about li {
+      background: #fff; margin:15px 0; padding:20px;
+      border-left:4px solid var(--accent);
+      box-shadow:0 3px 6px rgba(0,0,0,0.05);
+      transition: transform .3s;
+    }
+    #about li:hover { transform: translateX(10px); }
+    #about li p { margin-top:8px; }
+
+    /* —— SERVICES —— */
+    #services .cards {
+      display:grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px,1fr));
+      gap:20px; width:100%; max-width:900px;
+    }
+    .service-card {
+      background:#fff; padding:20px; border-radius:10px;
+      box-shadow:0 4px 8px rgba(0,0,0,0.1);
+      transition: transform .3s;
+    }
+    .service-card:hover { transform: translateY(-10px); }
+    .service-card h3 { color:var(--accent); margin-bottom:10px; }
+    .service-card p { line-height:1.4; }
+
+    /* —— CURRENT PROJECTS —— */
+    #projects .grid {
+      display:grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px,1fr));
+      gap:20px; width:100%; max-width:900px;
+    }
+    .project-item {
+      background:#fff; padding:20px; border-radius:10px;
+      box-shadow:0 4px 8px rgba(0,0,0,0.1);
+      transition: box-shadow .3s;
+    }
+    .project-item:hover { box-shadow:0 6px 12px rgba(0,0,0,0.15); }
+    .project-item h3 { color:var(--accent); margin-bottom:8px; }
+    .project-item p { line-height:1.5; }
+
+    /* —— FOOTER —— */
+    footer {
+      text-align:center; padding:30px 0; background: var(--primary);
+      color: #fff; margin-top:-60px;
+    }
+    footer a { color:#fff; border-bottom:1px dashed #fff; }
+
+    @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+  </style>
+</head>
+<body>
+
+  <!-- NAVIGATION -->
+  <nav>
+    <img src="logoelement.png" alt="ANF Logo" />
+    <div class="links">
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="#services">Services</a>
+      <a href="#projects">Projects</a>
+    </div>
+  </nav>
+
+  <!-- HOME -->
+  <section id="home">
+    <img class="section-logo" src="logoelement.png" alt="" />
+    <div class="hero-content">
+      <h1>ANF GROUP</h1>
+      <p>Innovating AI, Security & Efficiency.</p>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <img class="section-logo" src="logoelement.png" alt="" />
+    <h2>Our Founders</h2>
+    <ul>
+      <li onclick="window.open('#','_blank')">
+        <strong>Nicholas Muthama Benson</strong>
+        <p>Economics major & financial strategist handling all fiscal planning.</p>
+      </li>
+      <li onclick="window.open('#','_blank')">
+        <strong>Faith Njoki Karomo</strong>
+        <p>Health‑system & general management lead overseeing project coordination.</p>
+      </li>
+      <li onclick="window.open('#','_blank')">
+        <strong>Alain Muriuki Juma</strong>
+        <p>Computer scientist & full‑stack developer crafting our digital solutions.</p>
+      </li>
+    </ul>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services">
+    <img class="section-logo" src="logoelement.png" alt="" />
+    <h2>Our Services</h2>
+    <div class="cards">
+      <div class="service-card">
+        <h3>AI Integration</h3>
+        <p>Custom ML models to turbocharge operations.</p>
+      </div>
+      <div class="service-card">
+        <h3>Security Audits</h3>
+        <p>Penetration testing & vulnerability assessments.</p>
+      </div>
+      <div class="service-card">
+        <h3>Process Optimization</h3>
+        <p>Streamline workflows to save time & reduce costs.</p>
+      </div>
+      <div class="service-card">
+        <h3>Consulting</h3>
+        <p>Strategic guidance from industry experts.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CURRENT PROJECTS -->
+  <section id="projects">
+    <img class="section-logo" src="logoelement.png" alt="" />
+    <h2>Current Projects</h2>
+    <div class="grid">
+      <div class="project-item">
+        <h3>Academic Recommender System</h3>
+        <p>Random Forest-based engine recommending tailored study materials.</p>
+      </div>
+      <div class="project-item">
+        <h3>Hospitals Scheduling Expert System</h3>
+        <p>AI-driven optimization of staff rotas, patient appointments & resources.</p>
+      </div>
+      <div class="project-item">
+        <h3>Wireless Security Toolkit</h3>
+        <p>Automated scripts for capturing WPA2 handshakes & testing Wi-Fi robustness.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    © 2025 ANF Group — <a href="mailto:anfgroup@gmail.com">anfgroup@gmail.com</a>
+  </footer>
+
+  <script>
+    // Scroll-reveal & logo pop
+    const secs = document.querySelectorAll('section');
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          const logo = e.target.querySelector('.section-logo');
+          if (logo) logo.style.opacity = 1;
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.2 });
+    secs.forEach(s => io.observe(s));
+
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelector('#home .hero-content').classList.add('visible');
+    });
+  </script>
+</body>
+</html>
