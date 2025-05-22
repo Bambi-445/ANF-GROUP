@@ -91,10 +91,14 @@
       background: var(--white); margin:15px 0; padding:20px;
       border-left:4px solid var(--accent);
       box-shadow:0 3px 6px rgba(0,0,0,0.05);
-      cursor:pointer; transition: transform .3s;
+      transition: transform .3s;
     }
     #about li:hover { transform: translateX(10px); }
     #about li p { margin-top:8px; color:var(--dark-text); }
+    /* make entire li clickable */
+    #about li a {
+      display: block; color: inherit;
+    }
 
     /* —— SERVICES —— */
     #services .cards {
@@ -112,29 +116,50 @@
     .service-card p { color:var(--dark-text); }
 
     /* —— PORTFOLIO —— */
-    #portfolio .grid {
+    #Projects\ under\ Research\ and\ development .grid {
       display:grid;
       grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
       gap:25px; width:100%; max-width:1000px;
     }
-    .portfolio-item {
+    .project-item {
       position:relative; overflow:hidden;
       border-radius:10px; box-shadow:0 4px 8px rgba(0,0,0,0.1);
-      cursor:pointer;
     }
-    .portfolio-item img {
+    .project-item img {
       display:block; width:100%; height: auto;
       transition: transform .5s;
     }
-    .portfolio-item:hover img { transform: scale(1.1); }
-    .portfolio-item .overlay {
+    .project-item:hover img { transform: scale(1.1); }
+    .project-item .overlay {
       position:absolute; top:0; left:0; right:0; bottom:0;
       background: rgba(0,0,0,0.5); color:#fff;
       display:flex; flex-direction:column;
       justify-content:center; align-items:center;
       opacity:0; transition: opacity .3s;
+      padding:20px;
+      text-align:center;
     }
-    .portfolio-item:hover .overlay { opacity:1; }
+    .project-item:hover .overlay { opacity:1; }
+    /* description area below overlay */
+    .project-item .description {
+      padding:15px;
+      background: var(--white);
+      color: var(--dark-text);
+      font-size:0.95rem;
+      line-height:1.4;
+      min-height:120px;
+    }
+
+    /* —— CALL TO ACTION —— */
+    .cta {
+      margin-top:40px; text-align:center;
+      background: var(--accent); color:#fff;
+      padding:20px; border-radius:8px;
+    }
+    .cta a {
+      color: #fff; font-weight:600;
+      text-decoration: underline;
+    }
 
     /* —— FOOTER —— */
     footer {
@@ -162,7 +187,7 @@
   <section id="home">
     <div class="hero-content">
       <!-- replace with your logo file -->
-      <img src="logo.png" alt="ANF Logo" />
+      <img src="logoelement.png" alt="ANF Logo" />
       <h1>ANF GROUP</h1>
     </div>
   </section>
@@ -171,17 +196,23 @@
   <section id="about">
     <h2>Our Founders</h2>
     <ul>
-      <li onclick="window.open('https://portfolio.alice.com','_blank')">
-        <strong>Nicholas Muthama Benson</strong>
-        <p>Economics major &amp; financial strategist handling all fiscal planning.</p>
+      <li>
+        <a href="Nick.html" target="_blank">
+          <strong>Nicholas Muthama Benson</strong>
+          <p>Economics major &amp; financial strategist handling all fiscal planning.</p>
+        </a>
       </li>
-      <li onclick="window.open('https://portfolio.brian.com','_blank')">
-        <strong>Faith Njoki Karomo</strong>
-        <p>Health &amp; general management expert overseeing project coordination.</p>
+      <li>
+        <a href="faith.html" target="_blank">
+          <strong>Faith Njoki Karomo</strong>
+          <p>Health &amp; general management expert overseeing project coordination.</p>
+        </a>
       </li>
-      <li onclick="window.open('https://portfolio.charles.com','_blank')">
-        <strong>Alain Muriuki Juma</strong>
-        <p>Computer scientist &amp; full-stack developer crafting our digital solutions.</p>
+      <li>
+        <a href="Alain.html" target="_blank">
+          <strong>Alain Muriuki Juma</strong>
+          <p>Computer scientist &amp; full-stack developer crafting our digital solutions.</p>
+        </a>
       </li>
       <!-- Add more founders here -->
     </ul>
@@ -212,31 +243,49 @@
   </section>
 
   <!-- PORTFOLIO -->
-  <section id="Projects under Research and development">
+  <section id="portfolio">
     <h2>Projects</h2>
     <div class="grid">
       <div class="project-item" onclick="window.open('#','_blank')">
-        <img src="https://via.placeholder.com/400x300" alt="ExpertTriage"/>
+        <img src="experttriage.png/400x300" alt="ExpertTriage"/>
         <div class="overlay">
           <h3>ExpertTriage</h3>
           <p>Expert-Assisted Hospital patient intake and management.</p>
         </div>
-      </div>
-      <div class="project-item" onclick="window.open('#','_blank')">
-        <img src="https://via.placeholder.com/400x300" alt="BizBot"/>
-        <div class="overlay">
-          <h3>BizBot</h3>
-          <p>Smart SME automation</p>
+        <div class="description">
+          <!-- 100-word description placeholder -->
+          Our hospital structural redesign program specializes in optimizing operational efficiency and patient capacity of current infrastructure. Through the reconfiguration of layouts, the optimization of patient flow pathways, and the utilization of sophisticated scheduling systems, we minimize wait times while achieving higher daily throughput. Innovations feature efficient triage zones, multi-purpose clinical areas, and real-time resource allocation analytics. This plan eliminates congestion, enhances employee productivity, and enhances quality of care—enabling private hospitals to serve more patients at a profit without investing in expansion. The redesign prioritizes premium service delivery, attracting high-value patients and eradicating operational inefficiency. A patient-centered, data-driven model transforms underutilized space into revenue streams, balancing clinical excellence with sustainable business growth.
         </div>
       </div>
+
       <div class="project-item" onclick="window.open('#','_blank')">
-        <img src="https://via.placeholder.com/400x300" alt="RouteMax"/>
+        <img src="customml.png/400x300" alt="BizBot"/>
+        <div class="overlay">
+          <h3>BizBots</h3>
+          <p>Smart SME automation</p>
+        </div>
+        <div class="description">
+          <!-- 100-word description placeholder -->
+          We create bespoke machine learning models or expert systems to address your specific business issues. Whether it's optimizing inventory, individualizing customer touchpoints, or predicting market changes, our answers convert raw data into actionable insights. Retail, health, finance, and manufacturing domain-specific models are readily integrated into your systems via APIs, preserving scale and precision. Collaborate with our data scientists to design algorithms bespoke to your goals, backed by open training processes and robust strength security protocols. Predictive maintenance to detecting fraud, automate decision-making with models that are built in collaboration with your operations. Innovate smarter, not harder.
+        </div>
+      </div>
+
+      <div class="project-item" onclick="window.open('#','_blank')">
+        <img src="lastmile.png/400x300" alt="RouteMax"/>
         <div class="overlay">
           <h3>RouteMax</h3>
           <p>Last-mile delivery Optimization</p>
         </div>
+        <div class="description">
+          <!-- 100-word description placeholder -->
+          Our last-mile optimization solution changes the way companies deliver. Leverage AI-based route planning to minimize transit times, fuel costs, and late deliveries. Dynamically route in real-time for traffic, weather, or priority orders, and have customers track deliveries through real-time GPS tracking. Interface seamlessly with existing logistics infrastructure to track fleets, automate dispatch, and track performance metrics like delivery success rates and carbon emissions. For e-commerce, restaurants, and logistics businesses, our scalable platform reduces operational friction, drives customer satisfaction, and improves costs by up to 30%. Turn last-mile messy complexities into a business strength by delivering smarter, faster, and greener.
+        </div>
       </div>
-      <!-- Add more portfolio items here -->
+    </div>
+
+    <!-- CALL TO ACTION -->
+    <div class="cta">
+      <p>Want to learn more or discuss a custom solution? <a href="mailto:anfgroup@gmail.com">Email us</a> today!</p>
     </div>
   </section>
 

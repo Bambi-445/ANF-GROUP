@@ -3,76 +3,102 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>ANF Group — Home / About / Services / Current Projects</title>
+  <title>ANF Group — Home / About / Services / Portfolio</title>
   <style>
     /* —— RESET & BASE —— */
     * { margin:0; padding:0; box-sizing:border-box; }
     html { scroll-behavior: smooth; }
-    body { font-family: 'Segoe UI', sans-serif; overflow-x:hidden; background: #f5f5f5; color: #333; }
+    body { font-family: 'Segoe UI', sans-serif; overflow-x:hidden; }
     a { text-decoration:none; color:inherit; cursor:pointer; }
 
     /* —— THEME COLORS —— */
     :root {
       --primary: #0a2239;
       --accent: #a36b5c;
-      --light-bg: #fefefe;
+      --light-bg: #f5f5f5;
+      --white: #fff;
+      --dark-text: #333;
     }
 
     /* —— NAVBAR —— */
     nav {
       position: fixed; top:0; left:0; right:0;
-      background: var(--light-bg);
-      display: flex; align-items:center; justify-content: space-between;
-      padding:10px 30px; box-shadow:0 2px 5px rgba(0,0,0,0.1);
-      z-index:100;
+      background: var(--white); padding:15px 30px;
+      display: flex; justify-content: flex-end; gap:20px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1); z-index:100;
     }
-    nav img { height:40px; animation: spin 10s linear infinite; }
-    @keyframes spin { from { transform: rotate(0deg);} to { transform: rotate(360deg);} }
-    nav .links a { margin-left:20px; font-weight:600; color: var(--primary); position: relative; }
-    nav .links a::after {
-      content: ''; position:absolute; left:0; bottom:-3px;
-      width:0; height:2px; background: var(--accent);
+    nav a {
+      font-weight:600; color: var(--primary);
+      position: relative;
+    }
+    nav a::after {
+      content:''; position:absolute; left:0; bottom:-5px;
+      height:2px; width:0; background: var(--accent);
       transition: width .3s;
     }
-    nav .links a:hover::after { width:100%; }
+    nav a:hover::after { width:100%; }
 
-    /* —— SECTION BASE —— */
+    /* —— GLOBAL SECTION STYLING —— */
     section {
-      min-height:100vh; padding:120px 20px 60px;
+      min-height:100vh; padding:100px 20px 60px;
       display:flex; flex-direction:column; align-items:center;
-      background: var(--light-bg); position: relative;
-      opacity:0; transform: translateY(30px);
+      justify-content: center; background: var(--light-bg);
+      opacity:0; transform: translateY(50px);
       transition: all 1s ease-out;
     }
-    section:nth-child(even) { background: var(--light-bg); }
-    section.visible { opacity:1; transform: translateY(0); }
-    .section-logo { width:80px; margin-bottom:20px;
-      opacity:0; animation: pop 1.2s ease-out forwards;
+    section:nth-child(even) { background: var(--white); }
+    section.visible {
+      opacity:1; transform: translateY(0);
     }
-    @keyframes pop {
-      0% { transform: scale(0.5); opacity:0; }
-      60% { transform: scale(1.2); opacity:1; }
-      100% { transform: scale(1); }
+    h1, h2 {
+      color: var(--primary); margin-bottom:10px;
+      letter-spacing:1px;
     }
-    h1, h2 { color: var(--primary); letter-spacing:1px; margin-bottom:10px; text-align:center; }
     h1 { font-size:3rem; }
-    h2 { font-size:2.5rem; }
+    h2 { font-size:2.5rem; cursor: default; }
 
     /* —— HERO —— */
-    #home { padding-top:80px; }
-    .hero-content { text-align:center; animation: fadeIn 2s ease-out forwards; opacity:0; }
-    .hero-content img { width:160px; margin:0 auto 1rem; filter: drop-shadow(0 0 10px rgba(0,0,0,0.2)); }
+    #home {
+      position: relative; padding-top:0;
+      overflow:hidden;
+      background: var(--light-bg);
+    }
+    #home::before, #home::after {
+      content:''; position:absolute; width:200%; height:200%;
+      background: var(--accent); opacity:0.5; z-index:1;
+      transform:rotate(45deg);
+      animation: slide 6s infinite alternate ease-in-out;
+    }
+    #home::after { animation-delay:3s; opacity:0.3; }
+    @keyframes slide {
+      from { transform: translate(-50%,-50%) rotate(45deg); }
+      to   { transform: translate(20%,20%) rotate(45deg); }
+    }
+    .hero-content {
+      position: relative; z-index:2; text-align:center;
+      animation: fadeIn 2s ease-out forwards; opacity:0;
+      margin-top:60px;
+    }
+    .hero-content img {
+      width:140px; margin-bottom:1rem;
+    }
 
     /* —— ABOUT —— */
-    #about ul { list-style:none; width:100%; max-width:600px; }
+    #about ul {
+      list-style:none; width:100%; max-width:600px;
+    }
     #about li {
-      background: #fff; margin:15px 0; padding:20px;
+      background: var(--white); margin:15px 0; padding:20px;
       border-left:4px solid var(--accent);
       box-shadow:0 3px 6px rgba(0,0,0,0.05);
       transition: transform .3s;
     }
     #about li:hover { transform: translateX(10px); }
-    #about li p { margin-top:8px; }
+    #about li p { margin-top:8px; color:var(--dark-text); }
+    /* make entire li clickable */
+    #about li a {
+      display: block; color: inherit;
+    }
 
     /* —— SERVICES —— */
     #services .cards {
@@ -81,85 +107,120 @@
       gap:20px; width:100%; max-width:900px;
     }
     .service-card {
-      background:#fff; padding:20px; border-radius:10px;
+      background: var(--white); padding:20px; border-radius:10px;
       box-shadow:0 4px 8px rgba(0,0,0,0.1);
       transition: transform .3s;
     }
     .service-card:hover { transform: translateY(-10px); }
     .service-card h3 { color:var(--accent); margin-bottom:10px; }
-    .service-card p { line-height:1.4; }
+    .service-card p { color:var(--dark-text); }
 
-    /* —— CURRENT PROJECTS —— */
-    #projects .grid {
+    /* —— PORTFOLIO —— */
+    #Projects\ under\ Research\ and\ development .grid {
       display:grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px,1fr));
-      gap:20px; width:100%; max-width:900px;
+      grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
+      gap:25px; width:100%; max-width:1000px;
     }
     .project-item {
-      background:#fff; padding:20px; border-radius:10px;
-      box-shadow:0 4px 8px rgba(0,0,0,0.1);
-      transition: box-shadow .3s;
+      position:relative; overflow:hidden;
+      border-radius:10px; box-shadow:0 4px 8px rgba(0,0,0,0.1);
     }
-    .project-item:hover { box-shadow:0 6px 12px rgba(0,0,0,0.15); }
-    .project-item h3 { color:var(--accent); margin-bottom:8px; }
-    .project-item p { line-height:1.5; }
+    .project-item img {
+      display:block; width:100%; height: auto;
+      transition: transform .5s;
+    }
+    .project-item:hover img { transform: scale(1.1); }
+    .project-item .overlay {
+      position:absolute; top:0; left:0; right:0; bottom:0;
+      background: rgba(0,0,0,0.5); color:#fff;
+      display:flex; flex-direction:column;
+      justify-content:center; align-items:center;
+      opacity:0; transition: opacity .3s;
+      padding:20px;
+      text-align:center;
+    }
+    .project-item:hover .overlay { opacity:1; }
+    /* description area below overlay */
+    .project-item .description {
+      padding:15px;
+      background: var(--white);
+      color: var(--dark-text);
+      font-size:0.95rem;
+      line-height:1.4;
+      min-height:120px;
+    }
+
+    /* —— CALL TO ACTION —— */
+    .cta {
+      margin-top:40px; text-align:center;
+      background: var(--accent); color:#fff;
+      padding:20px; border-radius:8px;
+    }
+    .cta a {
+      color: #fff; font-weight:600;
+      text-decoration: underline;
+    }
 
     /* —— FOOTER —— */
     footer {
       text-align:center; padding:30px 0; background: var(--primary);
       color: #fff; margin-top:-60px;
     }
-    footer a { color:#fff; border-bottom:1px dashed #fff; }
 
-    @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+    /* —— KEYFRAMES —— */
+    @keyframes fadeIn {
+      to { opacity:1; } from { opacity:0; }
+    }
   </style>
 </head>
 <body>
 
   <!-- NAVIGATION -->
   <nav>
-    <img src="logoelement.png" alt="ANF Logo" />
-    <div class="links">
-      <a href="#home">Home</a>
-      <a href="#about">About</a>
-      <a href="#services">Services</a>
-      <a href="#projects">Projects</a>
-    </div>
+    <a href="#home">Home</a>
+    <a href="#about">About</a>
+    <a href="#services">Services</a>
+    <a href="#portfolio">Portfolio</a>
   </nav>
 
-  <!-- HOME -->
+  <!-- HOME / HERO -->
   <section id="home">
-    <img class="section-logo" src="logoelement.png" alt="" />
     <div class="hero-content">
+      <!-- replace with your logo file -->
+      <img src="logoelement.png" alt="ANF Logo" />
       <h1>ANF GROUP</h1>
-      <p>Innovating AI, Security & Efficiency.</p>
     </div>
   </section>
 
   <!-- ABOUT -->
   <section id="about">
-    <img class="section-logo" src="logoelement.png" alt="" />
     <h2>Our Founders</h2>
     <ul>
-      <li onclick="window.open('#','_blank')">
-        <strong>Nicholas Muthama Benson</strong>
-        <p>Economics major & financial strategist handling all fiscal planning.</p>
+      <li>
+        <a href="Nick.html" target="_blank">
+          <strong>Nicholas Muthama Benson</strong>
+          <p>Economics major &amp; financial strategist handling all fiscal planning.</p>
+        </a>
       </li>
-      <li onclick="window.open('#','_blank')">
-        <strong>Faith Njoki Karomo</strong>
-        <p>Health‑system & general management lead overseeing project coordination.</p>
+      <li>
+        <a href="faith.html" target="_blank">
+          <strong>Faith Njoki Karomo</strong>
+          <p>Health &amp; general management expert overseeing project coordination.</p>
+        </a>
       </li>
-      <li onclick="window.open('#','_blank')">
-        <strong>Alain Muriuki Juma</strong>
-        <p>Computer scientist & full‑stack developer crafting our digital solutions.</p>
+      <li>
+        <a href="Alain.html" target="_blank">
+          <strong>Alain Muriuki Juma</strong>
+          <p>Computer scientist &amp; full-stack developer crafting our digital solutions.</p>
+        </a>
       </li>
+      <!-- Add more founders here -->
     </ul>
   </section>
 
   <!-- SERVICES -->
   <section id="services">
-    <img class="section-logo" src="logoelement.png" alt="" />
-    <h2>Our Services</h2>
+    <h2>Services</h2>
     <div class="cards">
       <div class="service-card">
         <h3>AI Integration</h3>
@@ -167,36 +228,64 @@
       </div>
       <div class="service-card">
         <h3>Security Audits</h3>
-        <p>Penetration testing & vulnerability assessments.</p>
+        <p>Penetration testing &amp; vulnerability assessments.</p>
       </div>
       <div class="service-card">
         <h3>Process Optimization</h3>
-        <p>Streamline workflows to save time & reduce costs.</p>
+        <p>Streamline workflows to save time &amp; reduce costs.</p>
       </div>
       <div class="service-card">
         <h3>Consulting</h3>
         <p>Strategic guidance from industry experts.</p>
       </div>
+      <!-- Add more service cards here -->
     </div>
   </section>
 
-  <!-- CURRENT PROJECTS -->
-  <section id="projects">
-    <img class="section-logo" src="logoelement.png" alt="" />
-    <h2>Current Projects</h2>
+  <!-- PORTFOLIO -->
+  <section id="portfolio">
+    <h2>Projects</h2>
     <div class="grid">
-      <div class="project-item">
-        <h3>Academic Recommender System</h3>
-        <p>Random Forest-based engine recommending tailored study materials.</p>
+      <div class="project-item" onclick="window.open('#','_blank')">
+        <img src="https://via.placeholder.com/400x300" alt="ExpertTriage"/>
+        <div class="overlay">
+          <h3>ExpertTriage</h3>
+          <p>Expert-Assisted Hospital patient intake and management.</p>
+        </div>
+        <div class="description">
+          <!-- 100-word description placeholder -->
+          A comprehensive expert-assisted triage system designed for hospital environments. It streamlines patient intake by leveraging decision-support algorithms to prioritize cases, reduce waiting times, and allocate resources efficiently. Users benefit from intuitive interfaces, real-time monitoring, and automated reporting, enabling staff to handle high-volume scenarios with ease. Integrations with existing hospital databases ensure seamless data flow and accurate patient records. This platform enhances patient safety, staff productivity, and overall operational efficiency by combining clinical expertise with innovative technology.
+        </div>
       </div>
-      <div class="project-item">
-        <h3>Hospitals Scheduling Expert System</h3>
-        <p>AI-driven optimization of staff rotas, patient appointments & resources.</p>
+
+      <div class="project-item" onclick="window.open('#','_blank')">
+        <img src="https://via.placeholder.com/400x300" alt="BizBot"/>
+        <div class="overlay">
+          <h3>BizBot</h3>
+          <p>Smart SME automation</p>
+        </div>
+        <div class="description">
+          <!-- 100-word description placeholder -->
+          BizBot is an intelligent automation assistant tailored for small and medium enterprises, automating repetitive tasks such as invoicing, customer support, and inventory tracking. Through machine learning, it adapts to business patterns and provides predictive insights to optimize operations. The chatbot interface simplifies adoption, offering natural language commands for common workflows. Seamless integrations with popular accounting and CRM systems allow businesses to maintain consistency across platforms. BizBot empowers companies with limited resources to scale processes, reduce manual errors, and focus on strategic growth initiatives.
+        </div>
       </div>
-      <div class="project-item">
-        <h3>Wireless Security Toolkit</h3>
-        <p>Automated scripts for capturing WPA2 handshakes & testing Wi-Fi robustness.</p>
+
+      <div class="project-item" onclick="window.open('#','_blank')">
+        <img src="https://via.placeholder.com/400x300" alt="RouteMax"/>
+        <div class="overlay">
+          <h3>RouteMax</h3>
+          <p>Last-mile delivery Optimization</p>
+        </div>
+        <div class="description">
+          <!-- 100-word description placeholder -->
+          RouteMax is a dynamic routing engine optimized for last-mile logistics, minimizing delivery times and fuel consumption. It analyzes traffic, weather, and package priorities to generate efficient routes in real time. Fleet managers can monitor vehicle locations via a live dashboard, receive alerts for delays, and adjust plans instantly. The system’s predictive analytics forecast demand and suggest optimal fleet distributions. RouteMax reduces operational costs, improves customer satisfaction through accurate ETAs, and supports green delivery initiatives by optimizing resource usage.
+        </div>
       </div>
+    </div>
+
+    <!-- CALL TO ACTION -->
+    <div class="cta">
+      <p>Want to learn more or discuss a custom solution? <a href="mailto:anfgroup@gmail.com">Email us</a> today!</p>
     </div>
   </section>
 
@@ -205,23 +294,24 @@
     © 2025 ANF Group — <a href="mailto:anfgroup@gmail.com">anfgroup@gmail.com</a>
   </footer>
 
+  <!-- —— SCRIPTS —— -->
   <script>
-    // Scroll-reveal & logo pop
+    // Fade-in on scroll
     const secs = document.querySelectorAll('section');
     const io = new IntersectionObserver(entries => {
       entries.forEach(e => {
         if (e.isIntersecting) {
           e.target.classList.add('visible');
-          const logo = e.target.querySelector('.section-logo');
-          if (logo) logo.style.opacity = 1;
           io.unobserve(e.target);
         }
       });
     }, { threshold: 0.2 });
     secs.forEach(s => io.observe(s));
 
+    // Initial hero fade-in
     document.addEventListener('DOMContentLoaded', () => {
-      document.querySelector('#home .hero-content').classList.add('visible');
+      document.querySelector('#home .hero-content')
+              .classList.add('visible');
     });
   </script>
 </body>

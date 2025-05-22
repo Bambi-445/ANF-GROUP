@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ANF Group — Alain Muriuki Juma</title>
+
+  <!-- —— EMBEDDED CSS —— -->
+  <style>
+    /* —— RESET & BOX‐SIZING —— */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Segoe UI', sans-serif; background: #f5f5f5; color: #333; }
+
+    /* —— THEME VARIABLES —— */
+    :root {
+      --primary: #A3715A;    /* skew banner, borders */
+      --accent:  #8C533A;    /* hover & highlights */
+      --text:    #0A2F3C;    /* headings/text */
+      --bg:      #ffffff;    /* card background */
+    }
+
+    /* —— NAVBAR —— */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      background: var(--bg); padding: 15px 30px;
+      display: flex; justify-content: space-between;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1); z-index: 100;
+    }
+    nav a, nav button {
+      font-weight: 600; color: var(--text);
+      background: none; border: none; cursor: pointer;
+      position: relative; padding: 8px 12px;
+    }
+    nav a:hover::after, nav button:hover::after {
+      width: 100%;
+    }
+    nav a::after, nav button::after {
+      content: ''; position: absolute; left: 0; bottom: -4px;
+      height: 2px; width: 0; background: var(--accent);
+      transition: width .3s;
+    }
+
+    /* —— PROFILE CARD —— */
+    .profile-card {
+      max-width: 800px; margin: 120px auto 60px;
+      background: var(--bg); border-radius: 12px;
+      overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      opacity: 0; transform: translateY(50px);
+      transition: all 0.8s ease-out; /* fade-in scroll */
+    }
+    .profile-card.visible {
+      opacity: 1; transform: translateY(0);
+    }
+
+    /* —— SKEWED TOP BANNER —— */
+    .profile-card .banner {
+      height: 80px; background: var(--primary);
+      transform: skewY(-6deg); transform-origin: top left;
+      margin-bottom: -40px; position: relative;
+      overflow: hidden;
+    }
+    .banner::before, .banner::after {
+      content: '';
+      position: absolute; width: 200%; height: 200%;
+      background: var(--accent); opacity: 0.3;
+      transform: rotate(45deg);
+      animation: slide 6s infinite alternate ease-in-out;
+    }
+    .banner::after { animation-delay: 3s; opacity: 0.15; }
+    @keyframes slide {
+      from { transform: translate(-50%,-50%) rotate(45deg); }
+      to   { transform: translate(20%,20%) rotate(45deg); }
+    }
+
+    /* —— PROFILE CONTENT LAYOUT —— */
+    .content {
+      display: flex; padding: 40px;
+    }
+    .avatar {
+      flex: 1; display: flex; align-items: center;
+      justify-content: center;
+    }
+    .avatar img {
+      width: 160px; height: 160px; border-radius: 50%;
+      border: 4px solid var(--primary);
+      transition: transform .3s;
+    }
+    .avatar img:hover {
+      transform: scale(1.1); /* pop on hover */
+    }
+    .details {
+      flex: 2; padding-left: 30px;
+    }
+    .details h1 {
+      font-size: 2.5rem; color: var(--text);
+      margin-bottom: 6px; transition: color .3s;
+    }
+    .details h1:hover { color: var(--accent); }
+    .details h2 { font-size: 1.25rem; color: #555; margin-bottom: 20px; }
+    .info p {
+      margin-bottom: 12px; display: flex; align-items: center;
+    }
+    .info p span.icon { margin-right: 8px; }
+
+  </style>
+</head>
+<body>
+
+  <!-- —— NAVIGATION —— -->
+  <nav>
+    <!-- Back Home link, adjust href as needed -->
+    <a href="index.html">◀ Back Home</a>
+    <!-- Contact button opens default mail client to compose email -->
+    <button onclick="window.location.href='mailto:nicholasmuthama237com'">
+      ✉ Contact
+    </button>
+  </nav>
+
+  <!-- —— PROFILE CARD —— -->
+  <div class="profile-card" id="profile">
+    <div class="banner"></div>
+
+    <div class="content">
+      <div class="avatar">
+        <img src="logoelement.png" alt="Faith Njoki Karomo" />
+      </div>
+      <div class="details">
+        <h1>Alain Muriuki Juma</h1>
+        <h2>CEO ANF Group</h2>
+        <div class="info">
+          <p><span class="icon">✉️</span>
+            <a href="alainmuriuki@gmail.com">alainmuriuki@gmail.com</a>
+          </p>
+          <p><span class="icon">📞</span> +254746643907</p>
+          <p><span class="icon">📍</span> Nairobi, Kenya</p>
+          <p><span class="icon">🌐</span>
+            <a href="https://www.anfgroup.com" target="_blank">anfgroup.com</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- —— EMBEDDED JAVASCRIPT —— -->
+  <script>
+    // Fade-in when profile card scrolls into view
+    const card = document.getElementById('profile');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          card.classList.add('visible');
+          observer.unobserve(card);
+        }
+      });
+    }, { threshold: 0.2 });
+    observer.observe(card);
+  </script>
+
+</body>
+</html>
